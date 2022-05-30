@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     // onTouchEvent is called when an motion event on the screen has been detected.
-    public boolean onTouchEvent(MotionEvent event){
+    public boolean onTouchEvent(MotionEvent event) {
 
         // If a pressed gesture is detected
         if (event.getActionMasked() == MotionEvent.ACTION_UP) {
