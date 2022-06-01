@@ -33,34 +33,23 @@ public class MainActivity extends AppCompatActivity {
     }
 
     // onTouchEvent is called when an motion event on the screen has been detected.
+    // onTouchEvent is defined in MainActivity and not on the view because MainActivity is the
+    // controller.
+    @Override
     public boolean onTouchEvent(MotionEvent event) {
+        super.onTouchEvent(event);
 
         // If a pressed gesture is detected
         if (event.getActionMasked() == MotionEvent.ACTION_UP) {
 
-            // Redirecting the click towards the component view
-            ballView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-
-                    // The x and y click position are set to the BallView class.
-                    // event.getY() is the pixels from the top of the activity. The pixels from the
-                    // top of ballView are needed by ballView.setPosTopDpx.
-                    ballView.setPosLeftDpx((int) event.getX());
-                    ballView.setPosTopDpx((int) (event.getY() - (mainActivityHeight - ballView.getHeight())));
-
-                    // Refreshing the view ballView
-                    ballView.invalidate();
-                }
-            });
-
-            // onClickListener of BallView is called
-            if(!ballView.performClick()) {
-                Log.e("Error", "BallView does not implement onClickListener.");
-            }
+            // The x and y click position are set to the BallView class.
+            // event.getY() is the pixels from the top of the activity. The pixels from the top of
+            // ballView are needed by ballView.setPosTopDpx.
+            ballView.setPosLeftDpx((int) event.getX());
+            ballView.setPosTopDpx((int) (event.getY() - (mainActivityHeight - ballView.getHeight())));
+            ballView.performClick();
+            return true;
         }
-
-        // The touch event has been handled
-        return false;
+        else return false;
     }
 }

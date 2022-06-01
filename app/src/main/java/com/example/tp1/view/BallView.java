@@ -55,6 +55,16 @@ public class BallView extends View {
         canvas.drawBitmap(ballPicture, posLeftDpx, posTopDpx, picturePainter);
     }
 
+    // performClick method for a better accessibility
+    @Override
+    public boolean performClick(){
+        super.performClick();
+
+        // The view is updated
+        invalidate();
+        return true;
+    }
+
     // Attributes setters
     public void setPosTopDpx(int posTopDpx) {
         this.posTopDpx = posTopDpx - ballPicture.getHeight()/2;
