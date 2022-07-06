@@ -32,6 +32,20 @@ public class BallView extends View {
         super(context);
     }
 
+
+    public void setPosition(int posTopDpx, int posLeftDpx) {
+        this.posTopDpx = posTopDpx - ballPicture.getHeight()/2;
+        this.posLeftDpx = posLeftDpx - ballPicture.getWidth()/2;
+    }
+
+    public int getPosTopDpx() {
+        return posTopDpx + ballPicture.getHeight()/2;
+    }
+
+    public int getPosLeftDpx() {
+        return posLeftDpx + ballPicture.getWidth()/2;
+    }
+
     // onSizeChanged is called each time the size view changes, here only once because the activity
     // in which the view is displayed has been stacked in protrait mode (see manifest file).
     // onSizeChanged is called before onDraw.
@@ -63,11 +77,5 @@ public class BallView extends View {
         // The old view redraws with the new view (onDraw method is called)
         invalidate();
         return true;
-    }
-
-    // Attributes setters
-    public void setPosition(int posTopDpx, int posLeftDpx) {
-        this.posTopDpx = posTopDpx - ballPicture.getHeight()/2;
-        this.posLeftDpx = posLeftDpx - ballPicture.getWidth()/2;
     }
 }
