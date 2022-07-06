@@ -60,16 +60,15 @@ public class BallView extends View {
     public boolean performClick(){
         super.performClick();
 
+        //plus precis
         // The view is updated
         invalidate();
         return true;
     }
 
     // Attributes setters
-    public void setPosTopDpx(int posTopDpx) {
+    public void setPosition(int posTopDpx, int posLeftDpx) {
         this.posTopDpx = posTopDpx - ballPicture.getHeight()/2;
-    }
-    public void setPosLeftDpx(int posLeftDpx) {
         this.posLeftDpx = posLeftDpx - ballPicture.getWidth()/2;
     }
 }
