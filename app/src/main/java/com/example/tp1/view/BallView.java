@@ -60,8 +60,7 @@ public class BallView extends View {
     public boolean performClick(){
         super.performClick();
 
-        //plus precis
-        // The view is updated
+        // The old view redraws with the new view (onDraw method is called)
         invalidate();
         return true;
     }
