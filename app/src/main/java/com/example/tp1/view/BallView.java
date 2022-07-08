@@ -32,7 +32,6 @@ public class BallView extends View {
         super(context);
     }
 
-
     public void setPosition(int posTopDpx, int posLeftDpx) {
         this.posTopDpx = posTopDpx - ballPicture.getHeight()/2;
         this.posLeftDpx = posLeftDpx - ballPicture.getWidth()/2;

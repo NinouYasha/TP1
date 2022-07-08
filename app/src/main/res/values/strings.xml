@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">TP1</string>
+    <string name="minMovParamTitle">Ball wanna roll</string>
+    <string name="minMovParamDescription">Please select the minimum movement the ball is allowed to browse.</string>
 </resources>
