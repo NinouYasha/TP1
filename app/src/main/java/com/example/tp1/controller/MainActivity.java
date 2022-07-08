@@ -77,11 +77,6 @@ public class MainActivity extends AppCompatActivity {
                 // Type of the event
                 int eventType = event.getActionMasked();
 
-                // Getting the number displayed to the user. We do not simply get the number
-                // provided by the seek bar to avoid a desynchronisation with the text displayed
-                // and the smallest movement the ball browses (callback priorities unknown)
-                int minimumMovement = Integer.parseInt(tvChosenMinMovement.getText().toString());
-
                 // A pressed gesture is detected or a change has happened during a press gesture
                 if(eventType == MotionEvent.ACTION_DOWN || eventType == MotionEvent.ACTION_MOVE) {
                     int eventPosX = (int) event.getX();
@@ -104,6 +99,11 @@ public class MainActivity extends AppCompatActivity {
                         // A change has happened during a press gesture (between ACTION_DOWN and
                         // ACTION_UP)
                         case MotionEvent.ACTION_MOVE:
+
+                            // Getting the number displayed to the user. We do not simply get the number
+                            // provided by the seek bar to avoid a desynchronisation with the text displayed
+                            // and the smallest movement the ball browses (callback priorities unknown)
+                            int minimumMovement = Integer.parseInt(tvChosenMinMovement.getText().toString());
 
                             // If the pressure is detected distant of at least minimumMovement from the position
                             // of the ballView
