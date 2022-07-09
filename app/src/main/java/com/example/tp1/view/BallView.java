@@ -6,6 +6,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 import androidx.annotation.Nullable;
 import com.example.tp1.R;
@@ -22,6 +23,9 @@ public class BallView extends View {
     private int posTopDpx;
     private int posLeftDpx;
 
+    // Number of time the ball is at the bottom of the view
+    private int hitsOnBottom = 0;
+
     // Component view constructor with the physical layout
     public BallView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
@@ -33,8 +37,39 @@ public class BallView extends View {
     }
 
     public void setPosition(int posTopDpx, int posLeftDpx) {
-        this.posTopDpx = posTopDpx - ballPicture.getHeight()/2;
-        this.posLeftDpx = posLeftDpx - ballPicture.getWidth()/2;
+
+        // Determining the X position value
+
+        // If the finger reachs the Top of the screen, the ball does not get out of the screen
+        if(posTopDpx < getTop() + ballPicture.getHeight()/2) {
+            this.posTopDpx = getTop();
+            hitsOnBottom = 0;
+        }
+
+        // If the finger reachs the bottom of the screen, the ball does not get out of the screen
+        else if(posTopDpx > getBottom() - ballPicture.getHeight()/2) {
+            this.posTopDpx = getBottom() - ballPicture.getHeight();
+            hitsOnBottom ++;
+        }
+        else {
+            this.posTopDpx = posTopDpx - ballPicture.getHeight()/2;
+            hitsOnBottom = 0;
+        }
+
+        // Determining the Y position value
+
+        // If the finger reachs the left of the screen, the ball does not get out of the screen
+        if(posLeftDpx < getLeft() + ballPicture.getWidth()/2) {
+            this.posLeftDpx = getLeft();
+        }
+
+        // If the finger reachs the right of the screen, the ball does not get out of the screen
+        else if(posLeftDpx > getRight() - ballPicture.getWidth()/2) {
+            this.posLeftDpx = getRight() - ballPicture.getWidth();
+        }
+        else {
+            this.posLeftDpx = posLeftDpx - ballPicture.getWidth()/2;
+        }
     }
 
     public int getPosTopDpx() {
@@ -73,8 +108,15 @@ public class BallView extends View {
     public boolean performClick(){
         super.performClick();
 
-        // The old view redraws with the new view (onDraw method is called)
-        invalidate();
-        return true;
+        // If the user does not try to browse the ball from outside the view
+        if(hitsOnBottom <= 1) {
+
+            // The old view redraws with the new view (onDraw method is called)
+            invalidate();
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 }
